@@ -1,16 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./MainContainer.css";
 
 /**
  * PUBLIC_INTERFACE
  * MainContainer component for SimpleRecipeManager.
  * Provides a modern layout with sidebar for categories and main area for recipes,
- * utilizing light theme and brand colors.
+ * supports seamless light/dark theming with a toggle button. Brand colors intelligently adapt to each theme.
  * Ready to be extended with routing and integration for recipe browsing, management, and user authentication.
  */
 const MainContainer = () => {
+  // Detect system preference on mount and store theme in localStorage
+  const getSystemTheme = () =>
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("sr-theme") || getSystemTheme();
+    }
+    return "light";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("sr-theme", theme);
+  }, [theme]);
+
+  // Helper for accessibility label/icon
+  const themeButton = (
+    <button
+      className="sr-theme-toggle"
+      title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+    >
+      {theme === "dark" ? (
+        <span aria-hidden="true" style={{ fontSize: "1.25em" }}>🌞</span>
+      ) : (
+        <span aria-hidden="true" style={{ fontSize: "1.18em" }}>🌙</span>
+      )}
+    </button>
+  );
+
   return (
-    <div className="sr-app-root">
+    <div className={`sr-app-root${theme === "dark" ? " sr-theme-dark" : ""}`}>
       <aside className="sr-sidebar">
         <div className="sr-sidebar-header">
           <span className="sr-logo">🥗</span>
@@ -24,6 +58,8 @@ const MainContainer = () => {
           <a className="sr-category-link" href="#">Desserts</a>
         </nav>
         <div className="sr-auth-section">
+          {/* Theme toggle sits above or at the end of auth section */}
+          {themeButton}
           {/* Placeholder: User authentication (login/register/profile/logout) */}
           <button className="sr-btn sr-btn-accent">Login</button>
           <button className="sr-btn sr-btn-primary sr-btn-signup">Sign Up</button>

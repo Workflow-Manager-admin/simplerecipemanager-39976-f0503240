@@ -12,12 +12,31 @@
   --sr-shadow: 0 2px 16px 0 rgba(44,55,64,0.06);
 }
 
+/* Dark theme overrides via a root class */
+.sr-theme-dark {
+  --sr-primary: #81CB95;
+  --sr-secondary: #FFD54F;
+  --sr-accent: #FF7626;
+  --sr-bg: #22282d;
+  --sr-sidebar-bg: #1a2024;
+  --sr-text: #f2f2f2;
+  --sr-text-light: #a1b0ba;
+  --sr-border: #33404b;
+  --sr-shadow: 0 2px 18px 0 rgba(24, 32, 44, 0.14);
+}
+
 .sr-app-root {
   min-height: 100vh;
   display: flex;
   background: var(--sr-bg);
   color: var(--sr-text);
   font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  transition: background 0.3s, color 0.3s;
+}
+/* Dark theme smooth transition for .sr-app-root and children */
+.sr-theme-dark,
+.sr-theme-dark * {
+  transition: background 0.25s, color 0.25s, box-shadow 0.18s;
 }
 
 /* Sidebar styles */
@@ -33,6 +52,38 @@
   min-height: 100vh;
   z-index: 100;
   position: relative;
+}
+
+/* Theme toggle button */
+.sr-theme-toggle {
+  background: transparent;
+  border: none;
+  color: var(--sr-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-left: auto;
+  margin-bottom: 0;
+  margin-top: -6px;
+  margin-right: 0;
+  padding: 2px 7px 8px 7px;
+  border-radius: 6px;
+  transition: background 0.18s, color 0.16s;
+  box-shadow: none;
+}
+.sr-theme-toggle:hover,
+.sr-theme-toggle:focus {
+  background: var(--sr-secondary);
+  color: var(--sr-sidebar-bg);
+  outline: none;
+}
+.sr-theme-dark .sr-theme-toggle {
+  color: var(--sr-primary);
+}
+.sr-theme-dark .sr-theme-toggle:hover,
+.sr-theme-dark .sr-theme-toggle:focus {
+  background: var(--sr-primary);
+  color: #13221b;
 }
 
 .sr-sidebar-header {
@@ -72,10 +123,15 @@
   border-radius: 0 20px 20px 0;
 }
 
-.sr-category-link.active, .sr-category-link:hover {
-  background: #f2fdf8;
+.sr-category-link.active,
+.sr-category-link:hover {
+  background: rgba(76, 175, 80, 0.10); /* fallback for light */
   border-left: 4px solid var(--sr-primary);
   color: var(--sr-primary);
+}
+.sr-theme-dark .sr-category-link.active,
+.sr-theme-dark .sr-category-link:hover {
+  background: rgba(129, 203, 149, 0.08);
 }
 
 .sr-auth-section {
@@ -101,18 +157,35 @@
   outline: none;
   width: 100%;
 }
-
+.sr-theme-dark .sr-btn {
+  background: #233328;
+  color: var(--sr-primary);
+}
 .sr-btn-primary {
   background: var(--sr-primary);
   color: #fff;
+}
+.sr-theme-dark .sr-btn-primary {
+  background: var(--sr-primary);
+  color: #232323;
+  filter: brightness(0.92);
 }
 .sr-btn-secondary {
   background: var(--sr-secondary);
   color: #232323;
 }
+.sr-theme-dark .sr-btn-secondary {
+  background: var(--sr-secondary);
+  color: #141411;
+  filter: brightness(0.95);
+}
 .sr-btn-accent {
   background: var(--sr-accent);
   color: #fff;
+}
+.sr-theme-dark .sr-btn-accent {
+  background: var(--sr-accent);
+  color: #eee;
 }
 
 .sr-btn-signup {
@@ -123,7 +196,6 @@
   filter: brightness(0.95);
 }
 
-/* Main area styles */
 .sr-main-area {
   flex: 1;
   min-width: 0;
@@ -163,13 +235,17 @@
   min-width: 160px;
   background: #fff;
   color: var(--sr-text);
-  transition: border-color 0.14s;
+  transition: border-color 0.14s, background 0.14s;
 }
 .sr-search:focus {
   border-color: var(--sr-primary);
 }
+.sr-theme-dark .sr-search {
+  background: #263439;
+  color: var(--sr-text);
+  border-color: var(--sr-border);
+}
 
-/* Recipe listing placeholder */
 .sr-recipe-list {
   flex: 1;
   display: flex;
@@ -182,10 +258,18 @@
   border: 1px solid var(--sr-border);
   margin-bottom: 24px;
 }
+.sr-theme-dark .sr-recipe-list {
+  background: #22282d;
+  border: 1px solid var(--sr-border);
+  box-shadow: 0 2px 18px 0 rgba(24, 32, 44, 0.12);
+}
 
 .sr-recipe-empty {
   color: var(--sr-text-light);
   font-size: 1.13rem;
+}
+.sr-theme-dark .sr-recipe-empty {
+  color: var(--sr-text-light);
 }
 
 /* Responsive styles */
@@ -203,6 +287,7 @@
     box-shadow: none;
     padding: 10px 0;
     align-items: center;
+    background: var(--sr-sidebar-bg); /* theme-aware */
   }
   .sr-category-nav, .sr-auth-section {
     flex-direction: row;
@@ -216,5 +301,6 @@
   }
   .sr-main-area {
     padding: 18px 3% 18px 3%;
+    background: var(--sr-bg); /* theme-aware */
   }
 }
