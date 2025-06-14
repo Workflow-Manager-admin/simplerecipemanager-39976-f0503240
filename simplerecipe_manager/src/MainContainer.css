@@ -1,0 +1,220 @@
+:root {
+  --sr-primary: #4CAF50;
+  --sr-secondary: #FFC107;
+  --sr-accent: #FF5722;
+  --sr-sidebar-width: 240px;
+  --sr-bg: #fafaf9;
+  --sr-sidebar-bg: #fff;
+  --sr-text: #232323;
+  --sr-text-light: #757575;
+  --sr-border: #ededed;
+  --sr-radius: 13px;
+  --sr-shadow: 0 2px 16px 0 rgba(44,55,64,0.06);
+}
+
+.sr-app-root {
+  min-height: 100vh;
+  display: flex;
+  background: var(--sr-bg);
+  color: var(--sr-text);
+  font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+/* Sidebar styles */
+.sr-sidebar {
+  width: var(--sr-sidebar-width);
+  background: var(--sr-sidebar-bg);
+  border-right: 1px solid var(--sr-border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px 0;
+  box-shadow: var(--sr-shadow);
+  min-height: 100vh;
+  z-index: 100;
+  position: relative;
+}
+
+.sr-sidebar-header {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  gap: 12px;
+  margin-bottom: 36px;
+  padding-left: 32px;
+  letter-spacing: -1px;
+}
+
+.sr-logo {
+  font-size: 1.7rem;
+  color: var(--sr-primary);
+}
+
+.sr-brand {
+  color: var(--sr-primary);
+}
+
+.sr-category-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.sr-category-link {
+  padding: 11px 32px;
+  color: var(--sr-text-light);
+  text-decoration: none;
+  border-left: 4px solid transparent;
+  transition: background 0.18s, border-color 0.18s, color 0.16s;
+  font-size: 1rem;
+  border-radius: 0 20px 20px 0;
+}
+
+.sr-category-link.active, .sr-category-link:hover {
+  background: #f2fdf8;
+  border-left: 4px solid var(--sr-primary);
+  color: var(--sr-primary);
+}
+
+.sr-auth-section {
+  margin-top: auto;
+  padding: 26px 32px 0 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sr-btn {
+  background: #f6f6f6;
+  border: none;
+  border-radius: var(--sr-radius);
+  padding: 10px 0;
+  color: var(--sr-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: none;
+  transition: all 0.15s;
+  outline: none;
+  width: 100%;
+}
+
+.sr-btn-primary {
+  background: var(--sr-primary);
+  color: #fff;
+}
+.sr-btn-secondary {
+  background: var(--sr-secondary);
+  color: #232323;
+}
+.sr-btn-accent {
+  background: var(--sr-accent);
+  color: #fff;
+}
+
+.sr-btn-signup {
+  margin-top: 6px;
+}
+
+.sr-btn:hover {
+  filter: brightness(0.95);
+}
+
+/* Main area styles */
+.sr-main-area {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 38px 5% 38px 3%;
+}
+
+.sr-main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  gap: 24px;
+}
+
+.sr-main-title {
+  margin: 0;
+  font-size: 2.3rem;
+  font-weight: 600;
+  color: var(--sr-primary);
+  letter-spacing: -1px;
+}
+
+.sr-main-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.sr-search {
+  border: 1.5px solid var(--sr-border);
+  padding: 9px 15px;
+  font-size: 1rem;
+  border-radius: var(--sr-radius);
+  outline: none;
+  min-width: 160px;
+  background: #fff;
+  color: var(--sr-text);
+  transition: border-color 0.14s;
+}
+.sr-search:focus {
+  border-color: var(--sr-primary);
+}
+
+/* Recipe listing placeholder */
+.sr-recipe-list {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: var(--sr-radius);
+  box-shadow: var(--sr-shadow);
+  min-height: 260px;
+  border: 1px solid var(--sr-border);
+  margin-bottom: 24px;
+}
+
+.sr-recipe-empty {
+  color: var(--sr-text-light);
+  font-size: 1.13rem;
+}
+
+/* Responsive styles */
+@media (max-width: 800px) {
+  .sr-app-root {
+    flex-direction: column;
+  }
+  .sr-sidebar {
+    flex-direction: row;
+    width: 100%;
+    min-height: unset;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--sr-border);
+    box-shadow: none;
+    padding: 10px 0;
+    align-items: center;
+  }
+  .sr-category-nav, .sr-auth-section {
+    flex-direction: row;
+    gap: 10px;
+    width: unset;
+    padding: 0;
+  }
+  .sr-sidebar-header {
+    padding-left: 18px;
+    margin-bottom: 0;
+  }
+  .sr-main-area {
+    padding: 18px 3% 18px 3%;
+  }
+}
