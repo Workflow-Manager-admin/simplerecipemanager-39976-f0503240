@@ -1,7 +1,7 @@
 :root {
   --sr-primary: #4CAF50;
   --sr-secondary: #FFC107;
-  --sr-accent: #FF5722;
+  --sr-accent: #E91E63;
   --sr-sidebar-width: 240px;
   --sr-bg: #fafaf9;
   --sr-sidebar-bg: #fff;
@@ -16,7 +16,7 @@
 .sr-theme-dark {
   --sr-primary: #81CB95;
   --sr-secondary: #FFD54F;
-  --sr-accent: #FF7626;
+  --sr-accent: #E91E63;
   --sr-bg: #22282d;
   --sr-sidebar-bg: #1a2024;
   --sr-text: #f2f2f2;
