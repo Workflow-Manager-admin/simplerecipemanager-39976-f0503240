@@ -28,10 +28,37 @@
 .sr-app-root {
   min-height: 100vh;
   display: flex;
-  background: var(--sr-bg);
+  /* Light theme gradient: primary -> accent -> secondary, softly overlaid */
+  background: linear-gradient(
+      132deg,
+      #4CAF50 0%,
+      #FFC107 48%,
+      #E91E63 100%
+    );
   color: var(--sr-text);
   font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
   transition: background 0.3s, color 0.3s;
+  /* Fallback for users with reduced color support */
+  background-color: var(--sr-bg);
+}
+
+/* For better readability of card/area backgrounds above the gradient */
+.sr-main-area,
+.sr-sidebar {
+  /* Reviews for both light/dark handled later in file for specific backgrounds */
+}
+
+.sr-theme-dark .sr-app-root {
+  /* Dark theme gradient: deepened hues using darkened/muted tones of the brand colors */
+  background: linear-gradient(
+      132deg,
+      #224334 0%,
+      #5A3F37 33%,
+      #33313c 66%,
+      #2B1B24 100%
+    ),
+    var(--sr-bg); /* fallback for dark bg */
+  color: var(--sr-text);
 }
 /* Dark theme smooth transition for .sr-app-root and children */
 .sr-theme-dark,
